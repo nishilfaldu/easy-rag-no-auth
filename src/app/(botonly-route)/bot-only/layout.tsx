@@ -1,4 +1,4 @@
-export default function MarketingLayout({
+export default function BotOnlyNav({
   children,
 }: {
   children: React.ReactNode;
