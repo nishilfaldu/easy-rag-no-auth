@@ -5,26 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbot Integration</title>
+    <style>
+      /* Style to position the chatbot in the bottom right */
+      #chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 400px; /* Adjust this width as needed */
+        height: 600px; /* Adjust this height as needed */
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      iframe {
+        width: 200%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Optional: To remove margins/padding from body */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="chatbot-container"></div>
 
     <script>
-      window.addEventListener("load", async function () {
-        // Chatbot integration
+      window.addEventListener("load", function () {
         const botId = "j57cazdb49q6r5m9x7c4xw2xxd705zgq"; // Replace with a valid bot ID
         const iframe = document.createElement("iframe");
         iframe.src = `https://easy-rag-no-auth.vercel.app/bot-only/${botId}`;
-        iframe.style.width = "100%";
-        iframe.style.height = "500px";
-        iframe.style.border = "none";
-        iframe.style.borderRadius = "8px";
 
-        const chatbotContainer = document.createElement("div");
-        chatbotContainer.id = "chatbot-container";
-        document.getElementById("app").appendChild(chatbotContainer);
-
+        const chatbotContainer = document.getElementById("chatbot-container");
         if (chatbotContainer) {
           chatbotContainer.appendChild(iframe);
         } else {

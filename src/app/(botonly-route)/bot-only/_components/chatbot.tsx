@@ -67,7 +67,7 @@ export default function Chatbot({ botId }: ChatbotProps) {
       </div>
 
       <ScrollArea
-        className="flex-grow p-4 bg-gray-50 dark:bg-gray-900 overflow-y-auto"
+        className="flex-grow p-4 bg-gray-50 dark:bg-gray-900 overflow-y-auto h-[600px]"
         ref={chatContainerRef}
       >
         {messages?.map((message, index) => (
