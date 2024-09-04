@@ -76,65 +76,60 @@ export default function BotDetailsPage({ bot }: BotDetailsPageProps) {
   }, [messages]);
 
   const htmlString = `
-  <!doctype html>
+ <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clerk JavaScript Starter with Chatbot</title>
+    <title>Chatbot Integration</title>
+    <style>
+      /* Style to position the chatbot in the bottom right */
+      #chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 400px; /* Adjust this width as needed */
+        height: 750px; /* Adjust this height as needed */
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      iframe {
+        width: 200%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Optional: To remove margins/padding from body */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="app"></div>
-
-    <!-- Clerk Script Tag -->
-    <script
-      async
-      crossorigin="anonymous"
-      data-clerk-publishable-key="process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY"
-      onload="window.Clerk.load()"
-      src="https://bold-dolphin-3.clerk.accounts.dev/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
-      type="text/javascript"
-    ></script>
+    <div id="chatbot-container"></div>
 
     <script>
-      window.addEventListener("load", async function () {
-        await Clerk.load();
+      window.addEventListener("load", function () {
+        const iframe = document.createElement("iframe");
+        iframe.src = "https://easy-rag-no-auth.vercel.app/bot-only/${bot?._id}";
 
-        if (Clerk.user) {
-          document.getElementById("app").innerHTML = 
-            <div id="user-button"></div>
-            <div id="chatbot-container" style="width: 100%; height: 500px; border: none; border-radius: 8px;"></div>
-          ;
-
-          const userButtonDiv = document.getElementById("user-button");
-          Clerk.mountUserButton(userButtonDiv);
-
-          // Chatbot integration
-          const iframe = document.createElement("iframe");
-          iframe.src = https://easy-rag.vercel.app/bot/${bot?._id};
-          iframe.style.width = "100%";
-          iframe.style.height = "100%";
-          iframe.style.border = "none";
-          iframe.style.borderRadius = "8px";
-
-          const chatbotContainer = document.getElementById("chatbot-container");
-          if (chatbotContainer) {
-            chatbotContainer.appendChild(iframe);
-          } else {
-            console.error("Container with ID 'chatbot-container' not found.");
-          }
+        const chatbotContainer = document.getElementById("chatbot-container");
+        if (chatbotContainer) {
+          chatbotContainer.appendChild(iframe);
         } else {
-          document.getElementById("app").innerHTML =  <div id="sign-in"></div>;
-
-          const signInDiv = document.getElementById("sign-in");
-          Clerk.mountSignIn(signInDiv);
+          console.error("Container with ID 'chatbot-container' not found.");
         }
       });
     </script>
   </body>
 </html>
+
   `;
 
   return (
