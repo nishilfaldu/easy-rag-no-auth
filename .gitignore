@@ -36,7 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 # certificates
-certificates/*
+# certificates/*
 
 # dist bundle
 dist/.next
